@@ -1,0 +1,21 @@
+$snippet-link-color: #007bff;
+$snippet-hover-color: #0056b3;
+
+ul {
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin-bottom: 10px;
+
+    a {
+      color: $snippet-link-color;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $snippet-hover-color;
+      }
+    }
+  }
+}
