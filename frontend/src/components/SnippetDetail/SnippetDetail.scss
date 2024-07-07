@@ -1,0 +1,55 @@
+/* Styling for the SnippetDetail component */
+
+/* Container for snippet details */
+.snippet-detail-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  /* Snippet title styling */
+  .snippet-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  /* Snippet content styling */
+  .snippet-content {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+  }
+  
+  /* Label for snippet information */
+  .snippet-label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  /* Language display */
+  .snippet-language {
+    font-size: 1.1rem;
+    color: #28a745;
+    margin-bottom: 10px;
+  }
+  
+  /* Additional snippet info */
+  .snippet-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 10px;
+  }
+  
