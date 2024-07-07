@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Mini Pastebin Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend for the Mini Pastebin project. It is a React-based web application that allows users to create, edit, view, and delete code snippets. The application communicates with the backend API to manage snippets, and the user interface is responsive and styled using SCSS.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Display all code snippets.
+- Create a new snippet.
+- Edit and delete existing snippets.
+- View details of a single snippet.
+- SCSS for styling.
+- Axios for API calls to the backend.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React, SCSS, Axios
+- **Other Tools**: React Router for navigation, Axios for API calls
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Make sure you have the following installed on your machine:
 
-### `npm run build`
+- [Node.js](https://nodejs.org/) (with npm)
+- [Docker](https://www.docker.com/get-started) (if you want to run the project in a container)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/maitreya/mini-pastebin.git
+cd frontend
+```
 
-### `npm run eject`
+2. **Install dependencies**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Run the app locally**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To start the development server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+This will run the app at `http://localhost:3000`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Building the app
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To build the app for production:
 
-### Code Splitting
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The production-ready files will be available in the `build` directory.
 
-### Analyzing the Bundle Size
+## Docker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The frontend is fully containerized using Docker. To run the frontend in a Docker container:
 
-### Making a Progressive Web App
+1. **Build the Docker image**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+docker build -t mini-pastebin-frontend .
+```
 
-### Advanced Configuration
+2. **Run the Docker container**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+docker run -p 3000:80 mini-pastebin-frontend
+```
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Now, the frontend will be available at `http://localhost:3000`.
