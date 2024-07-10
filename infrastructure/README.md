@@ -82,8 +82,8 @@ mini-pastebin-infrastructure/
    Clone the infrastructure repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/mini-pastebin-infrastructure.git
-   cd mini-pastebin-infrastructure
+   git clone https://github.com/maitreya2954/infrastructure.git
+   cd infrastructure
    ```
 
 2. **Configure Environment Variables**:
