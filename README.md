@@ -40,33 +40,94 @@ Make sure you have the following installed on your machine:
 - [Node.js](https://nodejs.org/) (if you want to run the project outside Docker)
 - [npm](https://www.npmjs.com/get-npm) (included with Node.js)
   
-### Setup
+## Setup Instructions
 
-1. **Clone the repository**
+### 1. Infrastructure Setup with Terraform
 
-```bash
-git clone https://github.com/maitreya2954/mini-pastebin.git
-cd mini-pastebin
-```
+The cloud infrastructure for the application (VPC, EKS cluster, RDS, ECR) is managed by Terraform. You can find the Terraform configurations in the `mini-pastebin-infrastructure` repository.
 
-Update `.env` file inside the main folder (as per your postgresql config):
+1. **Initialize and apply Terraform configurations**:
 
-```env
-DB_NAME=my_pastebin_db
-DB_USER=myuser
-DB_PASSWORD=mypassword
-```
+   ```bash
+   terraform init
+   terraform apply
+   ```
 
+2. **Create and Push Docker Images to AWS ECR**
 
-3. **Run the application with Docker**
+   After the ECR repository is created by Terraform, build and push Docker images for both frontend and backend.
 
-Make sure Docker is installed and running on your machine, then run the following command to build and start the containers:
+   ```bash
+   # Backend
+   docker build -t <your-ecr-backend-repo-url> ./mini-pastebin-backend
+   docker push <your-ecr-backend-repo-url>
+
+   # Frontend
+   docker build -t <your-ecr-frontend-repo-url> ./mini-pastebin-frontend
+   docker push <your-ecr-frontend-repo-url>
+   ```
+
+### 2. Local Development
+
+You can run the application locally using Docker Compose:
 
 ```bash
 docker-compose up --build
 ```
 
-This command will:
-- Build and run the frontend on `http://localhost:3000`
-- Build and run the backend on `http://localhost:5000`
-- Spin up a PostgreSQL database
+### 3. Deploy to Kubernetes (EKS)
+
+Make sure the **Kubernetes manifests** (`k8s/`) are applied to your EKS cluster.
+
+```bash
+kubectl apply -f k8s/backend-deployment.yaml
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/ingress.yaml
+```
+
+### 4. CI/CD Pipeline
+
+The **CI/CD pipeline** is automated with **GitHub Actions**. It builds, tests, and pushes Docker images to AWS ECR, then updates the deployments in your AWS EKS cluster.
+
+To trigger the pipeline:
+- Push any changes to the `main` branch.
+- GitHub Actions will automatically build and deploy the new version of the app.
+
+## Secrets Configuration
+
+In your GitHub repository, configure the following **GitHub Secrets** for the CI/CD pipeline:
+
+- `AWS_ACCESS_KEY_ID`: Your AWS access key.
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
+- `AWS_REGION`: The AWS region where your resources are hosted.
+- `ECR_REGISTRY`: Your AWS ECR registry URL.
+- `EKS_CLUSTER_NAME`: The name of your EKS cluster.
+- `KUBECONFIG_DATA`: Base64-encoded kubeconfig file for accessing the EKS cluster.
+
+## Useful Commands
+
+### Build and Push Docker Images:
+
+```bash
+docker build -t <your-ecr-repo-url> ./mini-pastebin-backend
+docker push <your-ecr-repo-url>
+```
+
+### Kubernetes Deployments:
+
+```bash
+kubectl apply -f k8s/backend-deployment.yaml
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/ingress.yaml
+```
+
+### CI/CD Workflow (GitHub Actions)
+
+Check the `.github/workflows/ci-cd-pipeline.yml` for the CI/CD pipeline details.
+
+## Future Enhancements
+
+- Add user authentication for managing snippets.
+- Implement search functionality by snippet language or title.
+- Set up autoscaling for the EKS cluster based on traffic.
+- Add logging and monitoring with AWS CloudWatch or Prometheus.
