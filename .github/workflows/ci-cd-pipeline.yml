@@ -14,8 +14,8 @@ jobs:
 
     env:
       ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-      ECR_REPOSITORY_BACKEND: mini-pastebin-backend
-      ECR_REPOSITORY_FRONTEND: mini-pastebin-frontend
+      ECR_REPOSITORY_BACKEND: mini-pastebin-repo:backend
+      ECR_REPOSITORY_FRONTEND: mini-pastebin-repo:frontend
       AWS_REGION: ${{ secrets.AWS_REGION }}
       CLUSTER_NAME: ${{ secrets.EKS_CLUSTER_NAME }}
 
