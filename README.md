@@ -1,45 +1,46 @@
-# Mini Pastebin
 
-Mini Pastebin is a full-stack web application where users can create, edit, view, and delete code snippets. The project consists of a React frontend, a Node.js/Express backend, and a PostgreSQL database. The application is fully containerized using Docker, with both frontend and backend services running alongside a PostgreSQL database.
+# Mini Pastebin Application
+
+The **Mini Pastebin** is a full-stack web application that allows users to create, view, edit, and delete code snippets. This project consists of both a **frontend** (React) and a **backend** (Node.js/Express), with the entire infrastructure running on **AWS** using **EKS (Elastic Kubernetes Service)** and **AWS ECR** for Docker image storage.
+
+This repository covers:
+- **Frontend**: A React app that interacts with the backend to manage code snippets.
+- **Backend**: A Node.js/Express app that handles the API requests and connects to a PostgreSQL database.
+- **Infrastructure**: All services are containerized and deployed using **Kubernetes** on **AWS EKS**. The infrastructure setup is automated using **Terraform**.
+- **CI/CD Pipeline**: The project uses GitHub Actions to automate the build, testing, Docker image push to **AWS ECR**, and deployment to **AWS EKS**.
 
 ## Features
 
 - Create, view, edit, and delete code snippets.
-- Snippets contain a title, code content, and language information.
-- Responsive frontend built with React.
-- RESTful API built using Node.js and Express.
-- PostgreSQL database to store snippets.
-- Containerized with Docker for easy deployment and setup.
-- CI/CD ready with Docker Compose to manage the multi-container setup.
+- Frontend is built using **React**.
+- Backend is built using **Node.js** and **Express**.
+- **PostgreSQL** is used as the database.
+- **AWS EKS** is used to host the Kubernetes cluster.
+- **AWS ECR** is used to store Docker images.
+- **CI/CD** pipeline automates the entire process from code push to deployment.
 
-## Tech Stack
 
-- **Frontend**: React, SCSS, Axios
-- **Backend**: Node.js, Express, Sequelize ORM
-- **Database**: PostgreSQL
-- **Infrastructure**: Docker, Docker Compose
-- **Other Tools**: dotenv for environment management, body-parser for request handling
+## Prerequisites
 
-### Database
+To work with the project, you need:
+
+- **AWS Account**: Set up and configure AWS CLI.
+- **Docker**: Installed on your machine for building images.
+- **Terraform**: To provision the AWS infrastructure (EKS, ECR, etc.).
+- **kubectl**: To manage your Kubernetes cluster.
+- **Node.js**: To run the backend locally if needed.
+
+## Database
 
 PostgreSQL is used as the database, and the schema is managed using Sequelize ORM.
 
-- **Table**: `snippets`
-  - `id`: Primary key
-  - `title`: Title of the snippet
-  - `content`: Code content
-  - `language`: Programming language of the snippet
+    Table: snippets
+        id: Primary key
+        title: Title of the snippet
+        content: Code content
+        language: Programming language of the snippet
 
-## Getting Started
 
-### Prerequisites
-
-Make sure you have the following installed on your machine:
-
-- [Docker](https://www.docker.com/get-started)
-- [Node.js](https://nodejs.org/) (if you want to run the project outside Docker)
-- [npm](https://www.npmjs.com/get-npm) (included with Node.js)
-  
 ## Setup Instructions
 
 ### 1. Infrastructure Setup with Terraform
