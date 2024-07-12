@@ -32,6 +32,8 @@ jobs:
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-password: 'true'
 
       # Step 4: Build, Tag, and Push the Backend Docker image
       - name: Build and push backend Docker image
