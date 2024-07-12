@@ -28,7 +28,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Step 3: Log in to AWS ECR
+      #Step 3: Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Step 3.a: Log in to AWS ECR
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -56,7 +64,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y awscli
-          
+
       # Step 6: Set up kubectl
       - name: Set up kubectl
         run: |
@@ -77,10 +85,10 @@ jobs:
       # Step 9: Update Backend Deployment in EKS
       - name: Deploy backend to EKS
         run: |
-          kubectl set image deployment/backend-deployment backend=$ECR_REGISTRY/$ECR_REPOSITORY_BACKEND --record
+          kubectl set image deployment/backend-deployment backend=$ECR_REGISTRY/$ECR_REPOSITORY_BACKEND
 
       # Step 10: Update Frontend Deployment in EKS
       - name: Deploy frontend to EKS
         run: |
-          kubectl set image deployment/frontend-deployment frontend=$ECR_REGISTRY/$ECR_REPOSITORY_FRONTEND --record
+          kubectl set image deployment/frontend-deployment frontend=$ECR_REGISTRY/$ECR_REPOSITORY_FRONTEND
 
