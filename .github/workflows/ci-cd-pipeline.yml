@@ -47,6 +47,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
+      # Step 4a: Install Terraform
+      - name: Install Terraform
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y terraform
+      
+      # Step 4b: Build/Verify infrastructure
+      -name: Build/Verify infrastructure
+        run: |
+          terraform -chdir=infrastructure apply -auto-approve
+
       # Step 4: Build, Tag, and Push the Backend Docker image
       - name: Build and push backend Docker image
         run: |
