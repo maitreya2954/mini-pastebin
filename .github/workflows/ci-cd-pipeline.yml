@@ -54,7 +54,6 @@ jobs:
       # Step 6: Set up kubectl
       - name: Set up kubectl
         run: |
-          echo ${{ secrets.KUBECONFIG_DATA }} | base64 --decode > ~/.kube/config
           kubectl config use-context arn:aws:eks:${{ secrets.AWS_REGION }}:<account-id>:cluster/${{ secrets.EKS_CLUSTER_NAME }}
 
       # Step 7: Update Backend Deployment in EKS
