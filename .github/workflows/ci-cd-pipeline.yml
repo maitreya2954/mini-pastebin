@@ -51,6 +51,12 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_FRONTEND -f ./frontend/Dockerfile ./frontend
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_FRONTEND
 
+      # Step 7: Install AWS CLI
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+          
       # Step 6: Set up kubectl
       - name: Set up kubectl
         run: |
@@ -58,17 +64,6 @@ jobs:
           echo ${{ secrets.KUBECONFIG_DATA }} | base64 --decode > ~/.kube/config
           kubectl config use-context arn:aws:eks:${{ secrets.AWS_REGION }}:345594564536:cluster/${{ secrets.EKS_CLUSTER_NAME }}
           aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-
-      # Step 7: Install AWS CLI
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
-          aws configure
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
