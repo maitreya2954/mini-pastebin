@@ -54,7 +54,7 @@ jobs:
             sudo apt-get install -y terraform
       
       # Step 4b: Build/Verify infrastructure
-      -name: Build/Verify infrastructure
+      - name: Build/Verify infrastructure
         run: |
           terraform -chdir=infrastructure apply -auto-approve
 
