@@ -61,6 +61,7 @@ jobs:
       # Step 4b: Build/Verify infrastructure
       - name: Build/Verify infrastructure
         run: |
+          terraform -chdir=infrastructure init
           terraform -chdir=infrastructure apply -auto-approve
 
       # Step 4: Build, Tag, and Push the Backend Docker image
