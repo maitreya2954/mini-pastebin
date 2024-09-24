@@ -1,5 +1,5 @@
 
-# Mini Pastebin Application
+# Mini Pastebin: Scalable Snippet Manager with Automated Cloud Deployment and CI/CD using Terraform, AWS EKS and GitHub Actions 
 
 The **Mini Pastebin** is a full-stack web application that allows users to create, view, edit, and delete code snippets. This project consists of both a **frontend** (React) and a **backend** (Node.js/Express), with the entire infrastructure running on **AWS** using **EKS (Elastic Kubernetes Service)** and **AWS ECR** for Docker image storage.
 
